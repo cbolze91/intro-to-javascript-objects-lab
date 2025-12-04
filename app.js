@@ -116,10 +116,23 @@ Solve Exercise 7 here:
 const starter = game.party [0];
 
 // 2. Find the evovled pokemon based on number +1
-const evolved =pokemon.find (p => p.number === starter.number +1);
+const evolved = pokemon.find (p => p.number === starter.number +1);
 
 // 3. Replace starter with evolved form
 game.party.splice(0, 1, evolved);
 
 //console.log(game.party);
 
+
+/*
+Exercise 8
+1. Print the name of each Pokémon in your party.
+2. Consider using a loop or an array method to access each Pokémon's name.
+
+Solve Exercise 8 here:
+*/
+
+
+game.party.forEach(pokemon => {
+    console.log(pokemon.name);
+});
