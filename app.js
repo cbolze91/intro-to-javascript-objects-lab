@@ -57,3 +57,21 @@ game.party.push(bulbasaur);
 
 //console.log(game);
 
+
+/*
+Exercise 5
+1. Choose three more Pokémon from the `pokemon` array and add them to your party.
+2. Consider different attributes like 'type' or 'HP' for your selection. Which array method will you use to add them?
+
+
+Solve Exercise 5 here:
+*/
+
+
+const charmander = pokemon.find(p => p.name === "Charmander");
+const squirtle = pokemon.find(p => p.name === "Squirtle");
+const pikachu = pokemon.find(p => p.name === "Pikachu");
+
+game.party.push(charmander, squirtle, pikachu);
+
+//console.log(game.party);
