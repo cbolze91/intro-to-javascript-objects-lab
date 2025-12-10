@@ -51,11 +51,11 @@ Solve Exercise 4 here:
 */
 
 
-const bulbasaur = pokemon.find(p => p.name === "Bulbasaur");
+const starter = pokemon.find(p => p.starter === true);
 
-game.party.push(bulbasaur);
+game.party.push(starter);
 
-//console.log(game);
+console.log(game.party);
 
 
 /*
@@ -68,13 +68,15 @@ Solve Exercise 5 here:
 */
 
 
-const charmander = pokemon.find(p => p.name === "Charmander");
-const squirtle = pokemon.find(p => p.name === "Squirtle");
-const pikachu = pokemon.find(p => p.name === "Pikachu");
+const fireType = pokemon.find(p => p.type === "fire"); 
 
-game.party.push(charmander, squirtle, pikachu);
+const highHp = pokemon.find(p => p.hp > 80); 
 
-//console.log(game.party);
+const waterType = pokemon.find(p => p.type === "water"); 
+
+game.party.push(fireType, highHp, waterType);
+
+console.log(game.party);
 
 
 /*
@@ -112,16 +114,15 @@ More Hints: The existing starter Pokemon will be *replaced* in your party with t
 Solve Exercise 7 here:
 */
 
-// 1. Get current starter from the party
-const starter = game.party [0];
+const starterIndex = game.party.findIndex(p => p.starter);
 
-// 2. Find the evovled pokemon based on number +1
-const evolved = pokemon.find (p => p.number === starter.number +1);
+const starterToEvolve = game.party[starterIndex];
 
-// 3. Replace starter with evolved form
-game.party.splice(0, 1, evolved);
+const evolved = pokemon.find(p => p.number === starterToEvolve.number + 1);
 
-//console.log(game.party);
+game.party.splice(starterIndex, 1, evolved);
+
+console.log(game.party);
 
 
 /*
@@ -165,17 +166,17 @@ Solve Exercise 10 here:
 */
 
 
-// Add the method to the game object
+
 game.catchPokemon = function(pokemonObj) {
-  game.party.push(pokemonObj);
+  this.party.push(pokemonObj);
 };
 
-// Call the method and pass in a Pokémon
-const meowth = pokemon.find(p => p.name === "Meowth");
+const electricType = pokemon.find(p => p.type === "electric");
 
-game.catchPokemon(meowth);
+game.catchPokemon(electricType);
 
-//console.log(game.party);
+console.log(game.party);
+
 
 
 /*
@@ -192,23 +193,24 @@ Solve Exercise 11 here:
 */
 
 
+// Exercise 11
+
 game.catchPokemon = function(pokemonObj) {
-  // Add caught Pokémon to the party
-  game.party.push(pokemonObj);
-
-  // Find the pokeball item
-  const pokeballItem = game.items.find(item => item.name === "pokeball");
-
-  // Decrease the pokeball count
+  const pokeballItem = this.items.find(item => item.name === "pokeball");
+  if (!pokeballItem) {
+    console.log("No pokeballs found in inventory.");
+    return;
+  }
   pokeballItem.quantity--;
+  this.party.push(pokemonObj);
 };
 
-// Test the method:
-const abra = pokemon.find(p => p.name === "Abra");
-game.catchPokemon(abra);
+const highHpPokemon = pokemon.find(p => p.hp > 60);
 
-// Confirm the pokeballs decreased
+game.catchPokemon(highHpPokemon);
+
 console.log(game.items);
+
 
 
 /*
@@ -288,9 +290,10 @@ Solve Exercise 14 here:
 */
 
 
-game.partyCount = function() {
-  return game.party.length;
+game.partyCount = function () {
+  return this.party.length;
 };
+
 
 
 console.log(game.partyCount());
